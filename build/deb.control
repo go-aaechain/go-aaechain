@@ -1,0 +1,25 @@
+Source: {{.Name}}
+Section: science
+Priority: extra
+Maintainer: {{.Author}}
+Build-Depends: debhelper (>= 8.0.0), golang-1.9
+Standards-Version: 3.9.5
+Homepage: https://aaeereum.org
+Vcs-Git: git://github.com/aaechain/go-aaechain.git
+Vcs-Browser: https://github.com/aaechain/go-aaechain
+
+Package: {{.Name}}
+Architecture: any
+Depends: ${misc:Depends}, {{.ExeList}}
+Description: Meta-package to install gaae and other tools
+ Meta-package to install gaae and other tools
+
+{{range .Executables}}
+Package: {{$.ExeName .}}
+Conflicts: {{$.ExeConflicts .}}
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Built-Using: ${misc:Built-Using}
+Description: {{.Description}}
+ {{.Description}}
+{{end}}
